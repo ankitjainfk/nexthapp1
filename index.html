@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript"> 
+
+window.onload = function() {
+  document.getElementById('resetbutton').style.display = 'none';
+};
+
+function myreset() {
+    var x = document.getElementById("demo");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+	
+	var x1 = document.getElementById("resetbutton");
+    if (x1.style.display === "none") {
+        x1.style.display = "block";
+    } else {
+        x1.style.display = "none";
+    }
+	
+	var x2 = document.getElementById("calcbutton");
+    if (x2.style.display === "none") {
+        x2.style.display = "block";
+    } else {
+        x2.style.display = "none";
+    }
+	
+	document.getElementById("myform").reset();
+}
+
+function myfunction() { 
+
+		var c=document.getElementById("fname").value;
+        var d=document.getElementById("lname").value;
+        if (c==null || c=="",d==null || d=="")
+        {
+            alert("Please Fill All Required Field");
+            return false;
+        }
+		
+    var newStr = document.getElementById("fname").value.toLowerCase() + "loves" + document.getElementById("lname").value.toLowerCase();
+      
+		var str = "";
+		while(newStr.length != 0) {
+			var c = newStr.charAt(0);
+			var index = newStr.indexOf(c);
+			var counter = 0;
+			while (index >= 0) {
+				counter++;			
+			    index = newStr.indexOf(c, index + 1);
+			}
+			newStr = newStr.replace(new RegExp(c,'g'), "");
+			str = str + counter;
+		}
+       
+        while (str.length != 2) {
+			var l = str.length;
+			var j = l - 1;
+			var sb = "";
+            
+			for (var i = 0; i <= l / 2; i++) {
+				if (i < j) {
+					sb = sb + (parseInt(str.charAt(i)) + parseInt(str.charAt(j)));
+                    
+					j--;
+				} else if (i == j) {
+					sb = sb + parseInt(str.charAt(i));
+				}
+			}
+			str = sb;
+		}
+		
+		document.getElementById("demo").innerHTML = str + "%";
+		var element = document.getElementById("demo");
+		element.classList.add("mystyle");
+		
+		var x3 = document.getElementById("demo");
+		if (x3.style.display === "none") {
+			x3.style.display = "block";
+			x3.classList.add("mystyle");
+		} 
+		
+		var x1 = document.getElementById("calcbutton");
+		if (x1.style.display === "none") {
+			x1.style.display = "block";
+		} else {
+			x1.style.display = "none";
+		}
+		var x2 = document.getElementById("resetbutton");
+		if (x2.style.display === "none") {
+			x2.style.display = "block";
+		} else {
+			x2.style.display = "none";
+		}
+} 
+</script> 
+<style>
+* {
+    box-sizing: border-box;
+}
+
+.mystyle {
+    width: 100%;
+    padding: 25px;
+    background-color: FF69B4;
+    color: white;
+    font-size: 25px;
+	float: middle;
+}
+
+input[type=text]{
+    width: 60%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 10px 10px 10px 0;
+    display: inline-block;
+	color: white;
+	font-size:30px;
+}
+
+input[type=button] {
+    background-color: #FF69B4;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+	margin-top: 15px;
+	margin-left: 30%;
+    cursor: pointer;
+    float: middle;
+}
+
+input[type=button]:hover {
+    background-color: #FF1493;
+}
+
+.container {
+	position:fixed;
+    border-radius: 5px;
+	top:20%;
+	left:10%;
+    background-color: #CC0033;
+    padding: 20px;
+	width: 80%;
+	opacity: 0.9;
+    filter: alpha(opacity=90); 
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+.blinking{
+	animation:blinkingText 1.5s infinite;
+}
+@keyframes blinkingText{
+	0%{		color: #000;	}
+	49%{	color: white;	}
+	50%{	color: white;	}
+	99%{	color:white;	}
+	100%{	color: #000;	}
+}
+
+</style>
+</head>
+<body background="./img/background.jpg">
+
+<div class="container">
+  <form id="myform">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">He</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname" name="firstname" placeholder="He name..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">She</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" name="lastname" placeholder="She name..">
+      </div>
+    </div>
+    
+    <div class="row">
+      <input type="button" id="calcbutton" onclick="myfunction()" value="Calculate">
+	  <input type="button" id="resetbutton" onclick="myreset()" value="Reset">
+    </div>
+	<p style="text-align:center;font-size:40px" class="blinking" id="demo"></p>
+  </form>
+  
+</div>
+
+</body>
+</html>
